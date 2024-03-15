@@ -2,6 +2,8 @@
 
 This is a 3rd personal controller test project
 
+**Godor Engine version: Godot_v4.2.1-stable_win64**
+
 WASD for walk;
 
 Space for jump;
