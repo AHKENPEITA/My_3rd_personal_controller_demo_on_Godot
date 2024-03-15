@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://botjajtuo0d48"]
+
+[ext_resource type="Script" path="res://Resource/Object/Object.gd" id="1_0oof8"]
+[ext_resource type="PackedScene" uid="uid://d1yxqxkuvbxsy" path="res://Resource/Model/Trunk.glb" id="1_tsajo"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2n222"]
+height = 4.0
+radius = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fuy6j"]
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_qb5ha"]
+
+[node name="StaticBody3D" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_0oof8")
+object_name = "光秃秃的树"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_2n222")
+
+[node name="Trunk" parent="." instance=ExtResource("1_tsajo")]
+
+[node name="leavs" type="Node3D" parent="."]
+
+[node name="leaf" type="MeshInstance3D" parent="leavs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.693581, 4.06683, 0.299857)
+material_override = SubResource("StandardMaterial3D_fuy6j")
+mesh = SubResource("QuadMesh_qb5ha")
+
+[node name="leaf2" type="MeshInstance3D" parent="leavs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08376, 3.05122, 0.299857)
+material_override = SubResource("StandardMaterial3D_fuy6j")
+mesh = SubResource("QuadMesh_qb5ha")
+
+[node name="leaf3" type="MeshInstance3D" parent="leavs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.603503, 4.7434, -0.399469)
+material_override = SubResource("StandardMaterial3D_fuy6j")
+mesh = SubResource("QuadMesh_qb5ha")

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn7hvhlnyvcc2"]
+
+[ext_resource type="Script" path="res://Resource/Object/Object.gd" id="1_1dnpg"]
+[ext_resource type="Texture2D" uid="uid://vouxampu0l7d" path="res://Resource/Texture/test_orange.png" id="1_x482l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ne401"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixsn8"]
+albedo_texture = ExtResource("1_x482l")
+rim_enabled = true
+rim = 0.27
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_f7q8n"]
+material = SubResource("StandardMaterial3D_ixsn8")
+
+[node name="Box" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_1dnpg")
+object_name = "黄色方块"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_ne401")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_f7q8n")

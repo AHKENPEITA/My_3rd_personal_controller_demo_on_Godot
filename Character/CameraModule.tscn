@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://b16wws2gq51lr"]
+
+[ext_resource type="Script" path="res://Controller/CameraModule.gd" id="1_jwull"]
+
+[node name="camera_module" type="Node3D" node_paths=PackedStringArray("center_pivot", "camera", "detect_ray", "normal_view", "aim_view")]
+script = ExtResource("1_jwull")
+center_pivot = NodePath("center_pivot")
+camera = NodePath("center_pivot/Camera3D")
+detect_ray = NodePath("center_pivot/Camera3D/detect_ray")
+normal_view = NodePath("center_pivot/normal_view")
+aim_view = NodePath("center_pivot/aim_view")
+pitch_nega_lim = -80
+
+[node name="center_pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="Camera3D" type="Camera3D" parent="center_pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, -1.046, 0.5, 1.648)
+
+[node name="detect_ray" type="RayCast3D" parent="center_pivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1)
+target_position = Vector3(0, -2.4, 0)
+collision_mask = 14
+
+[node name="aim_view" type="Node3D" parent="center_pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.498128, 0.381124, 0.524973)
+
+[node name="normal_view" type="Node3D" parent="center_pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, -1.046, 0.5, 1.648)

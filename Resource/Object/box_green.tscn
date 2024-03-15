@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c40y3g6r8dkis"]
+
+[ext_resource type="Script" path="res://Resource/Object/Object.gd" id="1_cyr07"]
+[ext_resource type="Texture2D" uid="uid://bnreasregjbcn" path="res://Resource/Texture/test_green.png" id="1_kvniq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c1gtf"]
+size = Vector3(4, 4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4q7lm"]
+albedo_texture = ExtResource("1_kvniq")
+rim_enabled = true
+rim = 0.26
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_40360"]
+material = SubResource("StandardMaterial3D_4q7lm")
+size = Vector3(4, 4, 4)
+
+[node name="Box_green" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_cyr07")
+object_name = "绿色方块"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_c1gtf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_40360")

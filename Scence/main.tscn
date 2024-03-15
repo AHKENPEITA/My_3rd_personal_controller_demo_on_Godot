@@ -1,0 +1,164 @@
+[gd_scene load_steps=17 format=3 uid="uid://b0j66agmin3g5"]
+
+[ext_resource type="Script" path="res://Controller/SceneManager.gd" id="1_2v833"]
+[ext_resource type="PackedScene" uid="uid://b16wws2gq51lr" path="res://Character/CameraModule.tscn" id="2_o0u4k"]
+[ext_resource type="Texture2D" uid="uid://ccq0isie3u88v" path="res://Resource/Texture/test_ground_grid.png" id="3_otior"]
+[ext_resource type="PackedScene" uid="uid://bn7hvhlnyvcc2" path="res://Resource/Object/box_orange.tscn" id="4_beec7"]
+[ext_resource type="PackedScene" uid="uid://b4i5xkwsgrtcw" path="res://Resource/Object/slope.tscn" id="5_ldgh2"]
+[ext_resource type="PackedScene" uid="uid://c40y3g6r8dkis" path="res://Resource/Object/box_green.tscn" id="6_hx4ef"]
+[ext_resource type="PackedScene" uid="uid://diklf8o833xsc" path="res://Character/CharacterDummy.tscn" id="6_rx17v"]
+[ext_resource type="PackedScene" uid="uid://botjajtuo0d48" path="res://Resource/Object/tree.tscn" id="8_4copx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rux43"]
+sky_top_color = Color(0.14902, 0.364706, 0.890196, 1)
+sky_horizon_color = Color(0.588235, 0.839216, 0.988235, 1)
+sky_energy_multiplier = 0.54
+ground_horizon_color = Color(0.712745, 0.744211, 0.743054, 1)
+sun_angle_max = 19.18
+sun_curve = 0.0652913
+
+[sub_resource type="Sky" id="Sky_qtlma"]
+sky_material = SubResource("ProceduralSkyMaterial_rux43")
+
+[sub_resource type="Environment" id="Environment_rfk4y"]
+background_mode = 2
+sky = SubResource("Sky_qtlma")
+glow_enabled = true
+fog_light_color = Color(0.403922, 0.54902, 0.807843, 1)
+fog_light_energy = 0.12
+fog_density = 0.018
+fog_sky_affect = 0.633
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8ks0a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cf8mw"]
+albedo_texture = ExtResource("3_otior")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yqkf5"]
+material = SubResource("StandardMaterial3D_cf8mw")
+size = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q4wrs"]
+line_spacing = 5.0
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_urtu8"]
+line_spacing = 5.0
+font_size = 25
+
+[node name="Root" type="Node" node_paths=PackedStringArray("camera_module", "player_character", "target_object_label")]
+script = ExtResource("1_2v833")
+camera_module = NodePath("camera_module")
+player_character = NodePath("WorldEnvironment/character_dummy")
+target_object_label = NodePath("ui/target_object_panel/target_object_label")
+
+[node name="camera_module" parent="." instance=ExtResource("2_o0u4k")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rfk4y")
+
+[node name="SunLight" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.741926, 0.325809, 0.585999, 0.147665, -0.773136, 0.616812, 0.654019, 0.54416, 0.525499, -0.0725307, 5.65024, 0.060091)
+light_energy = 0.952
+light_indirect_energy = 1.57
+light_volumetric_fog_energy = 1.598
+shadow_enabled = true
+shadow_bias = 1.852
+shadow_blur = 0.0
+
+[node name="Ground" type="StaticBody3D" parent="WorldEnvironment"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldEnvironment/Ground"]
+shape = SubResource("WorldBoundaryShape3D_8ks0a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldEnvironment/Ground"]
+transform = Transform3D(16, 0, 0, 0, 16, 0, 0, 0, 16, 0, 0, 0)
+mesh = SubResource("PlaneMesh_yqkf5")
+
+[node name="Slope" parent="WorldEnvironment" instance=ExtResource("5_ldgh2")]
+
+[node name="Box" parent="WorldEnvironment" instance=ExtResource("4_beec7")]
+transform = Transform3D(0.897782, 0, -0.440441, 0, 1, 0, 0.440441, 0, 0.897782, 4.08404, 1.19209e-06, 0.503183)
+
+[node name="Box2" parent="WorldEnvironment" instance=ExtResource("4_beec7")]
+transform = Transform3D(0.897782, 0, -0.440441, 0, 1, 0, 0.440441, 0, 0.897782, -2.58575, 1.19209e-06, 7.21025)
+
+[node name="Box3" parent="WorldEnvironment" instance=ExtResource("4_beec7")]
+transform = Transform3D(0.897782, 0, -0.440441, 0, 1, 0, 0.440441, 0, 0.897782, -1.17642, 1.19209e-06, -9.28121)
+
+[node name="Box_green2" parent="WorldEnvironment" instance=ExtResource("6_hx4ef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.6644, 0, 14.672)
+
+[node name="Box4" parent="WorldEnvironment" instance=ExtResource("4_beec7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
+
+[node name="Box_green" parent="WorldEnvironment" instance=ExtResource("6_hx4ef")]
+transform = Transform3D(0.897782, 0, -0.440441, 0, 1, 0, 0.440441, 0, 0.897782, 10.7551, -1.19209e-06, -0.823132)
+
+[node name="character_dummy" parent="WorldEnvironment" instance=ExtResource("6_rx17v")]
+
+[node name="StaticBody3D" parent="WorldEnvironment" instance=ExtResource("8_4copx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70127, 0, -3.31405)
+
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -12.0
+offset_right = 2.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -2.0
+offset_right = 12.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="target_object_panel" type="Label" parent="ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 63.0
+offset_top = -18.0
+offset_right = 209.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "目标物体:"
+label_settings = SubResource("LabelSettings_q4wrs")
+
+[node name="target_object_label" type="Label" parent="ui/target_object_panel"]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 1.0
+offset_right = 215.0
+offset_bottom = 41.0
+text = "无目标"
+label_settings = SubResource("LabelSettings_urtu8")

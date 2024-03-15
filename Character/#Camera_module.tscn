@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Controller/#CameraController.gd" id="1_ou1q6"]
+
+[node name="camera_module" type="Node3D" node_paths=PackedStringArray("pivot", "camera3D", "normalViewCollider", "normalView", "point_ray")]
+script = ExtResource("1_ou1q6")
+pivot = NodePath("pivot")
+camera3D = NodePath("pivot/character_camera")
+normalViewCollider = NodePath("pivot/normal_view_collider")
+normalView = NodePath("pivot/normal_view")
+point_ray = NodePath("pivot/character_camera/point_ray")
+
+[node name="pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="normal_view_collider" type="RayCast3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0.4)
+target_position = Vector3(0, 0, 3)
+
+[node name="normal_view" type="Node3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0.2835, 1.84867)
+
+[node name="character_camera" type="Camera3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871558, 0, -0.0871558, 0.996195, 0, 0.507051, 2.95127)
+
+[node name="point_ray" type="RayCast3D" parent="pivot/character_camera"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -2.5)
+target_position = Vector3(0, -3, 0)
+collision_mask = 14

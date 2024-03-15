@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4i5xkwsgrtcw"]
+
+[ext_resource type="Script" path="res://Resource/Object/Object.gd" id="1_u5lpt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_45ooi"]
+size = Vector3(1, 0.2, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f7q8n"]
+
+[node name="Slope" type="StaticBody3D"]
+transform = Transform3D(5, 0, 0, 0, 4.84213, -1.24649, 0, 1.24649, 4.84213, -10.6868, 2.5, -11.2462)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_u5lpt")
+object_name = "斜坡"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_45ooi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("BoxMesh_f7q8n")
